@@ -1,2 +1,2 @@
-from .devicesendor import send
+from .devicesendor import DeviceSendor
 
