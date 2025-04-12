@@ -6,7 +6,7 @@ import time
 import random
 from confluent_kafka import Producer
 
-BROKER_LIST = ['kafka-cluster-brokers.strimzi-kafka:9092']
+BROKER_LIST = ['kafka-cluster-kafka-brokers.strimzi-kafka:9092']
 
 # Kafka configuration
 conf = {
