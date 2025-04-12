@@ -1,2 +1,2 @@
-from .sensor import DeviceSendor
+# from .sensor import DeviceSendor
 

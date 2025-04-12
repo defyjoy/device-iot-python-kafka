@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: device-iot
+  template:
+    metadata:
+      labels:
+        app: device-iot
+    spec:
+      containers:
+      - name: python-kafka
+        image: ghcr.io/defyjoy/docker-iot-python-kafka:latest
