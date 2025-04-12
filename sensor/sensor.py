@@ -18,13 +18,14 @@ TOPIC = os.getenv("KAFKA_TOPIC")
 # BROKER_LIST = 'kafka-cluster-kafka-brokers.strimzi-kafka:9092'
 # TOPIC = 'sensor-data'
 
+logging.info(f"🚀 Using Kafka brokers: {BROKER_LIST} and TOPIC: {TOPIC}")
+
 # Kafka configuration
 conf = {
     'bootstrap.servers': BROKER_LIST
 }
 
-# Create Kafka Producer
-producer = Producer(conf)
+
 
 # Function to simulate sensor data
 def get_sensor_data(sensor_id):
@@ -54,6 +55,8 @@ def publish_sensor_data(sensor_id, interval=2):
     logging.info(f"🚀 Publishing data for sensor: {sensor_id}")
     logging.info(f"🚀 Publishing data to topic {TOPIC} on broker list {BROKER_LIST}")
     try:
+        # Create Kafka Producer
+        producer = Producer(conf)
         while True:
             data = get_sensor_data(sensor_id)
             producer.produce(TOPIC, key=str(sensor_id), value=json.dumps(data), callback=acked)

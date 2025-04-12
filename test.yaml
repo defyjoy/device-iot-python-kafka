@@ -15,3 +15,8 @@ spec:
       containers:
       - name: python-kafka
         image: ghcr.io/defyjoy/docker-iot-python-kafka:latest
+        env:
+        - name: KAFKA_BROKERS_LIST
+          value: "kafka-cluster-kafka-brokers.strimzi-kafka:9092"
+        - name: KAFKA_TOPIC
+          value: "sensor-data"
