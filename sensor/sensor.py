@@ -1,20 +1,27 @@
 import json
-import random
-
-import json
 import time
 import random
+import logging
+import signal
+import sys
+import os
 from confluent_kafka import Producer
 
-BROKER_LIST = ['kafka-cluster-kafka-brokers.strimzi-kafka:9092']
+logging.basicConfig(
+    level=logging.INFO,
+    format='[%(asctime)s] %(levelname)s - %(message)s',
+    handlers=[logging.StreamHandler(sys.stdout)]
+)
+
+BROKER_LIST = os.getenv("KAFKA_BROKERS_LIST")
+TOPIC = os.getenv("KAFKA_TOPIC")
+# BROKER_LIST = 'kafka-cluster-kafka-brokers.strimzi-kafka:9092'
+# TOPIC = 'sensor-data'
 
 # Kafka configuration
 conf = {
     'bootstrap.servers': BROKER_LIST
 }
-
-# Kafka topic
-TOPIC = 'sensor-data'
 
 # Create Kafka Producer
 producer = Producer(conf)
@@ -43,15 +50,19 @@ def acked(err, msg):
 
 # Main loop to publish data
 def publish_sensor_data(sensor_id, interval=2):
-    print("🚀 Starting sensor data publisher...")
+    logging.info("🚀 Starting sensor data publisher...")
+    logging.info(f"🚀 Publishing data for sensor: {sensor_id}")
+    logging.info(f"🚀 Publishing data to topic {TOPIC} on broker list {BROKER_LIST}")
     try:
         while True:
             data = get_sensor_data(sensor_id)
             producer.produce(TOPIC, key=str(sensor_id), value=json.dumps(data), callback=acked)
             producer.poll(1)  # triggers delivery callbacks
             time.sleep(interval)
-    except KeyboardInterrupt:
-        print("🛑 Stopping publisher.")
+    except Exception as e:
+        logging.exception("🛑 Stopping publisher.")
+        logging.exception("🛑 Producer error occurred.")
+        logging.exception(e)
     finally:
         producer.flush()
 
