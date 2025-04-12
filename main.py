@@ -1,4 +1,6 @@
+import os
 from sensor.sensor import publish_sensor_data
+
 
 def main():
     """
@@ -8,8 +10,11 @@ def main():
     sensors, uncomment the corresponding lines.
 
     """
-    publish_sensor_data(sensor_id='sensor-001')
-    # publish_sensor_data(sensor_id='sensor-002')
+    
+    producers = os.getenv('KAFKA_PRODUCERS_COUNT',1)
+    
+    for producer in range(int(producers)):
+        publish_sensor_data(sensor_id=f'sensor-00{producer}')
     # publish_sensor_data(sensor_id='sensor-003')
     # publish_sensor_data(sensor_id='sensor-004')
     # publish_sensor_data(sensor_id='sensor-005')
