@@ -18,3 +18,6 @@ def main():
     # publish_sensor_data(sensor_id='sensor-008')
     # publish_sensor_data(sensor_id='sensor-009')
     # publish_sensor_data(sensor_id='sensor-010')
+    
+if __name__ == "__main__":
+  main()
