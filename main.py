@@ -15,14 +15,6 @@ def main():
     
     for producer in range(int(producers)):
         publish_sensor_data(sensor_id=f'sensor-00{producer}')
-    # publish_sensor_data(sensor_id='sensor-003')
-    # publish_sensor_data(sensor_id='sensor-004')
-    # publish_sensor_data(sensor_id='sensor-005')
-    # publish_sensor_data(sensor_id='sensor-006')
-    # publish_sensor_data(sensor_id='sensor-007')
-    # publish_sensor_data(sensor_id='sensor-008')
-    # publish_sensor_data(sensor_id='sensor-009')
-    # publish_sensor_data(sensor_id='sensor-010')
     
 if __name__ == "__main__":
   main()
