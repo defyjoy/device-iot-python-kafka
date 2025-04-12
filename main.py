@@ -1,28 +1,20 @@
-"""
-Demonstrates how to schedule a job to be run in a process pool on 3 second intervals.
-"""
-from __future__ import annotations
-import os
-from devicesensor.devicesendor import DeviceSendor
-from datetime import datetime
+from sensor.sensor import publish_sensor_data
 
+def main():
+    """
+    Main entry point for the script.
 
-from apscheduler.schedulers.blocking import BlockingScheduler
+    Publishes sensor data for one or more sensors. To publish data for additional
+    sensors, uncomment the corresponding lines.
 
-
-def tick(sensor):
-    # print("Tick! The time is: %s" % datetime.now())
-    sensor.send()
-
-
-if __name__ == "__main__":
-    mySensor = DeviceSendor()
-    scheduler = BlockingScheduler()
-    scheduler.add_executor("processpool")
-    scheduler.add_job(tick, "interval", [mySensor], seconds=2)
-    print("Press Ctrl+{} to exit".format("Break" if os.name == "nt" else "C"))
-
-    try:
-        scheduler.start()
-    except (KeyboardInterrupt, SystemExit):
-        pass
+    """
+    publish_sensor_data(sensor_id='sensor-001')
+    # publish_sensor_data(sensor_id='sensor-002')
+    # publish_sensor_data(sensor_id='sensor-003')
+    # publish_sensor_data(sensor_id='sensor-004')
+    # publish_sensor_data(sensor_id='sensor-005')
+    # publish_sensor_data(sensor_id='sensor-006')
+    # publish_sensor_data(sensor_id='sensor-007')
+    # publish_sensor_data(sensor_id='sensor-008')
+    # publish_sensor_data(sensor_id='sensor-009')
+    # publish_sensor_data(sensor_id='sensor-010')

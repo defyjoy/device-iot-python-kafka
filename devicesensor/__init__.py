@@ -1,2 +1,0 @@
-from .devicesendor import DeviceSendor
-
