@@ -78,8 +78,10 @@ class ConfluentKafkaCheckpointedConsumer:
             return False
         
         try:
+            assigned_partitions = list(self.consumer.assignment())
+            
             # Get committed offsets for all assigned partitions
-            committed = self.consumer.committed(self.consumer.assignment())
+            committed = self.consumer.committed(assigned_partitions)
             
             # Get current positions for all assigned partitions
             current_offsets = {}
