@@ -14,7 +14,7 @@ def main():
     producers = os.getenv('KAFKA_PRODUCERS_COUNT',1)
     
     for producer in range(int(producers)):
-        publish_sensor_data(sensor_id=f'sensor-00{producer}')
+        publish_sensor_data(sensor_id=f'sensor-00{producer+1}')
     
 if __name__ == "__main__":
   main()

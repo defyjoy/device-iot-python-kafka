@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kafka-test
+  name: kafka-producer
 spec:
   replicas: 1
   selector:
@@ -20,3 +20,12 @@ spec:
           value: "kafka-cluster-kafka-brokers.strimzi-kafka:9092"
         - name: KAFKA_TOPIC
           value: "sensor-data"
+        - name: KAFKA_PRODUCERS_COUNT
+          value: "3"
+        resources:
+          requests:
+            cpu: 10m
+            memory: 20Mi
+          limits:
+            cpu: 20m
+            memory: 50Mi
