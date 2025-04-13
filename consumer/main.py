@@ -1,5 +1,5 @@
 import os
-from sensor.sensor import KafkaCheckpointedConsumer
+from sensor.sensor import ConfluentKafkaCheckpointedConsumer
 from sensor.message_processor import message_processor
 
 BROKER_LIST = os.getenv("KAFKA_BROKERS_LIST")
@@ -26,7 +26,7 @@ def main ():
   }
   
   # Create and run consumer
-  consumer = KafkaCheckpointedConsumer(**config)
+  consumer = ConfluentKafkaCheckpointedConsumer(**config)
   consumer.process_messages(message_processor)
 
 
