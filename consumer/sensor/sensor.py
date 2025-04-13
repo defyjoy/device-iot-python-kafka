@@ -80,6 +80,10 @@ class ConfluentKafkaCheckpointedConsumer:
         try:
             assigned_partitions = self.consumer.assignment()
             
+            if not assigned_partitions or len(assigned_partitions) == 0:
+                print("No partitions assigned. Skipping checkpoint.")
+                return False
+            
             # Get committed offsets for all assigned partitions
             committed = self.consumer.committed(assigned_partitions)
             
