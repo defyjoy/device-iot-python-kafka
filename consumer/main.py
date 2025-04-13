@@ -1,18 +1,14 @@
 import os
 from sensor.sensor import KafkaCheckpointedConsumer
+from sensor.message_processor import message_processor
 
 BROKER_LIST = os.getenv("KAFKA_BROKERS_LIST")
 TOPIC = os.getenv("KAFKA_TOPIC")
 
-def message_processor(message):
-    """Example message processing function"""
-    print(f"Processing message: {message}")
-    # Add your message processing logic here
+
 
 # Example usage
 if __name__ == "__main__":
-
-    
     # Configuration
     config = {
         'bootstrap_servers': BROKER_LIST,  # Change to your Kafka brokers

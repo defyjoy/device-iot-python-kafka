@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kafka-producer
+  name: kafka-consumer
 spec:
   replicas: 1
   selector:
@@ -14,14 +14,14 @@ spec:
     spec:
       containers:
       - name: python-kafka
-        image: ghcr.io/defyjoy/producer:latest
+        image: ghcr.io/defyjoy/consumer:latest
         env:
         - name: KAFKA_BROKERS_LIST
           value: "kafka-cluster-kafka-brokers.strimzi-kafka:9092"
         - name: KAFKA_TOPIC
           value: "sensor-data"
-        - name: KAFKA_PRODUCERS_COUNT
-          value: "3"
+        # - name: KAFKA_PRODUCERS_COUNT
+        #   value: "3"
         resources:
           requests:
             cpu: 10m
