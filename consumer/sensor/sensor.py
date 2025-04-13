@@ -21,6 +21,7 @@ class ConfluentKafkaCheckpointedConsumer:
             'group.id': group_id,
             'auto.offset.reset': 'earliest',  # Start from earliest if no checkpoint
             'enable.auto.commit': False,  # We'll handle commits manually
+            'enable.auto.offset.store': False,  # Disable auto offset store
             'on_commit': self._on_commit_callback
         }
         
