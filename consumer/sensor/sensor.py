@@ -78,7 +78,7 @@ class ConfluentKafkaCheckpointedConsumer:
             return False
         
         try:
-            assigned_partitions = list(self.consumer.assignment())
+            assigned_partitions = self.consumer.assignment()
             
             # Get committed offsets for all assigned partitions
             committed = self.consumer.committed(assigned_partitions)
@@ -96,6 +96,8 @@ class ConfluentKafkaCheckpointedConsumer:
             self.last_checkpoint_time = current_time
             print(f"{datetime.now()} - Checkpoint saved for {len(current_offsets)} partitions")
             return True
+        except KafkaException as e:
+            print(f"Raising KafkaException on saving checkpoint: {e}")
         except Exception as e:
             print(f"Error saving checkpoint: {e}")
             return False
