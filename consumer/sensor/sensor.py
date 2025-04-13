@@ -1,4 +1,4 @@
-from confluent_kafka import Consumer, KafkaException, KafkaError
+from confluent_kafka import Consumer, KafkaException, KafkaError,TopicPartition
 import json
 import time
 import os
@@ -131,8 +131,10 @@ class ConfluentKafkaCheckpointedConsumer:
                     print(f"Error processing message: {e}")
                     continue
                 
+                tp = TopicPartition(msg.topic(), msg.partition(), msg.offset() + 1)
+                
                 # Store offset for next commit
-                self.consumer.store_offsets(message=msg)
+                self.consumer.store_offsets(offsets=[tp])
                 
                 # Periodically commit stored offsets
                 self._save_checkpoint()
