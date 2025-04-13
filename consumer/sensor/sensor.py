@@ -134,7 +134,9 @@ class ConfluentKafkaCheckpointedConsumer:
                 tp = TopicPartition(msg.topic(), msg.partition(), msg.offset() + 1)
                 
                 # Store offset for next commit
-                self.consumer.store_offsets(offsets=[tp])
+                # self.consumer.store_offsets(offsets=[tp])
+                self.consumer.commit(offsets=[tp])
+
                 
                 # Periodically commit stored offsets
                 self._save_checkpoint()
